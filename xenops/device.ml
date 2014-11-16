@@ -1181,7 +1181,7 @@ let add_noexn ~xc ~xs ~hvm ?(assign=true) ?(pvpci=true) ?(flr=false) pcidevs_lis
 
 	List.iter (fun (dev, resources) ->
 		debug "Device.Pci.add domid=%d %d %d %d %d assign=%s pvpci=%s" domid dev.desc.domain dev.desc.bus dev.desc.slot dev.desc.func (string_of_bool assign) (string_of_bool pvpci);
-		if (hvm || pvpci) && assign then (
+		if hvm && assign then (
 			Xc.domain_assign_device xc domid (dev.desc.domain, dev.desc.bus, dev.desc.slot, dev.desc.func);
 			debug "Device.Pci.add assigned device %d %d %d %d to domid=%d" dev.desc.domain dev.desc.bus dev.desc.slot dev.desc.func domid;
 		);
